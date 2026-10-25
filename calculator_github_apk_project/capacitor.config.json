@@ -1,0 +1,6 @@
+{
+  "appId": "com.slspixelate.calculator",
+  "appName": "Calc",
+  "webDir": "www",
+  "bundledWebRuntime": false
+}

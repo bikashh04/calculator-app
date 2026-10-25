@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#f4f6fb" />
+  <title>Calc — All-in-One Calculator</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+        <div><p class="eyebrow">SMART TOOLS</p><h1>Calc<span>.</span></h1></div>
+      </div>
+      <button class="icon-button" id="themeButton" aria-label="Toggle color theme" title="Toggle theme">☼</button>
+    </header>
+
+    <nav class="tabs" aria-label="Calculator sections">
+      <button class="tab active" data-view="calculator">Calculator</button>
+      <button class="tab" data-view="scientific">Scientific</button>
+      <button class="tab" data-view="tools">Tools</button>
+      <button class="tab" data-view="history">History <span class="history-count" id="historyCount">0</span></button>
+    </nav>
+
+    <section class="view active" id="calculatorView">
+      <div class="calculator-card">
+        <div class="display">
+          <div class="display-meta"><span id="modeLabel">BASIC CALCULATOR</span><button id="copyResult" class="copy-button" title="Copy result">Copy</button></div>
+          <div class="expression" id="expression" aria-live="polite">&nbsp;</div>
+          <div class="result" id="result" aria-live="polite">0</div>
+        </div>
+        <div class="keypad" id="basicKeypad">
+          <button class="key utility" data-action="clear">AC</button>
+          <button class="key utility" data-action="sign">+/−</button>
+          <button class="key utility" data-action="percent">%</button>
+          <button class="key operator" data-value="÷">÷</button>
+          <button class="key" data-value="7">7</button><button class="key" data-value="8">8</button><button class="key" data-value="9">9</button><button class="key operator" data-value="×">×</button>
+          <button class="key" data-value="4">4</button><button class="key" data-value="5">5</button><button class="key" data-value="6">6</button><button class="key operator" data-value="−">−</button>
+          <button class="key" data-value="1">1</button><button class="key" data-value="2">2</button><button class="key" data-value="3">3</button><button class="key operator" data-value="+">+</button>
+          <button class="key wide" data-value="0">0</button><button class="key" data-value=".">.</button><button class="key equals" data-action="equals">=</button>
+          <button class="key secondary-key" data-action="backspace" aria-label="Delete last character">⌫</button>
+          <button class="key secondary-key" data-value="(">(</button><button class="key secondary-key" data-value=")">)</button><button class="key secondary-key" data-action="history">↺</button>
+        </div>
+      </div>
+      <p class="hint">Tip: use your keyboard too — Enter to calculate, Backspace to delete, Esc to clear.</p>
+    </section>
+
+    <section class="view" id="scientificView">
+      <div class="calculator-card">
+        <div class="display compact-display">
+          <div class="display-meta"><span>SCIENTIFIC MODE</span><button id="scientificCopy" class="copy-button">Copy</button></div>
+          <div class="expression" id="scientificExpression">&nbsp;</div>
+          <div class="result" id="scientificResult">0</div>
+        </div>
+        <div class="scientific-grid" id="scientificKeys">
+          <button class="key secondary-key" data-sci="sin(">sin</button><button class="key secondary-key" data-sci="cos(">cos</button><button class="key secondary-key" data-sci="tan(">tan</button><button class="key secondary-key" data-sci="log(">log</button><button class="key secondary-key" data-sci="ln(">ln</button>
+          <button class="key secondary-key" data-sci="sqrt(">√</button><button class="key secondary-key" data-sci="^2">x²</button><button class="key secondary-key" data-sci="^">xʸ</button><button class="key secondary-key" data-sci="!">x!</button><button class="key secondary-key" data-sci="π">π</button>
+          <button class="key secondary-key" data-sci="e">e</button><button class="key secondary-key" data-sci="(">(</button><button class="key secondary-key" data-sci=")">)</button><button class="key secondary-key" data-sci="Ans">Ans</button><button class="key operator" data-sci="÷">÷</button>
+          <button class="key" data-sci="7">7</button><button class="key" data-sci="8">8</button><button class="key" data-sci="9">9</button><button class="key operator" data-sci="×">×</button><button class="key utility" data-sci-action="clear">AC</button>
+          <button class="key" data-sci="4">4</button><button class="key" data-sci="5">5</button><button class="key" data-sci="6">6</button><button class="key operator" data-sci="−">−</button><button class="key secondary-key" data-sci-action="backspace">⌫</button>
+          <button class="key" data-sci="1">1</button><button class="key" data-sci="2">2</button><button class="key" data-sci="3">3</button><button class="key operator" data-sci="+">+</button><button class="key equals" data-sci-action="equals">=</button>
+          <button class="key wide" data-sci="0">0</button><button class="key" data-sci=".">.</button><button class="key secondary-key" data-sci="÷100">÷100</button>
+        </div>
+        <div class="angle-row"><span>Trigonometry angle mode</span><div class="segmented"><button class="angle-button active" data-angle="DEG">DEG</button><button class="angle-button" data-angle="RAD">RAD</button></div></div>
+      </div>
+      <p class="hint">Scientific functions use the selected angle mode. Use parentheses for complex expressions.</p>
+    </section>
+
+    <section class="view" id="toolsView">
+      <div class="section-heading"><p class="eyebrow">EVERYDAY MATH</p><h2>Quick tools</h2><p>Small calculations, made simple.</p></div>
+      <div class="tool-grid">
+        <article class="tool-card">
+          <div class="tool-icon">%</div><h3>Discount calculator</h3><p>Find the final price after a discount.</p>
+          <label for="originalPrice">Original price (₹)</label><input id="originalPrice" type="number" min="0" placeholder="e.g. 1999" />
+          <label for="discountRate">Discount (%)</label><input id="discountRate" type="number" min="0" max="100" placeholder="e.g. 20" />
+          <button class="primary-button" id="discountButton">Calculate discount</button><div class="tool-result" id="discountResult">Your result will appear here.</div>
+        </article>
+        <article class="tool-card">
+          <div class="tool-icon">GST</div><h3>GST calculator</h3><p>Add GST to a base amount.</p>
+          <label for="gstAmount">Amount before GST (₹)</label><input id="gstAmount" type="number" min="0" placeholder="e.g. 1000" />
+          <label for="gstRate">GST rate</label><select id="gstRate"><option value="5">5%</option><option value="12">12%</option><option value="18" selected>18%</option><option value="28">28%</option></select>
+          <button class="primary-button" id="gstButton">Calculate GST</button><div class="tool-result" id="gstResult">Your result will appear here.</div>
+        </article>
+        <article class="tool-card">
+          <div class="tool-icon">₹</div><h3>EMI estimator</h3><p>Estimate a monthly loan payment.</p>
+          <label for="loanAmount">Loan amount (₹)</label><input id="loanAmount" type="number" min="0" placeholder="e.g. 200000" />
+          <label for="interestRate">Annual interest (%)</label><input id="interestRate" type="number" min="0" step="0.1" placeholder="e.g. 9.5" />
+          <label for="loanYears">Loan term (years)</label><input id="loanYears" type="number" min="1" max="50" placeholder="e.g. 5" />
+          <button class="primary-button" id="emiButton">Estimate EMI</button><div class="tool-result" id="emiResult">Your result will appear here.</div>
+        </article>
+      </div>
+      <p class="disclaimer">GST and EMI results are estimates for convenience. Verify rates and terms before making financial decisions.</p>
+    </section>
+
+    <section class="view" id="historyView">
+      <div class="section-heading history-heading"><div><p class="eyebrow">YOUR RECENT WORK</p><h2>History</h2><p>Saved on this device only.</p></div><button class="text-button" id="clearHistory">Clear all</button></div>
+      <div class="history-list" id="historyList"></div>
+      <div class="empty-state" id="emptyHistory"><div class="empty-icon">↺</div><h3>No calculations yet</h3><p>Your calculations will show up here after you press =.</p><button class="primary-button" id="backToCalculator">Start calculating</button></div>
+    </section>
+
+    <footer><span>CALC<span class="blue-dot">.</span></span><span>Made for everyday math</span></footer>
+  </main>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
